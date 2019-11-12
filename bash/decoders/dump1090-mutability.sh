@@ -70,7 +70,7 @@ echo -e ""
 # Confirm component installation.
 if [[ "${RECEIVER_AUTOMATED_INSTALL}" = "false" ]] ; then
     # Interactive install.
-    CONTINUE_SETUP=$(whiptail --backtitle "${RECEIVER_PROJECT_TITLE}" --title "Dump1090-mutability Setup" --yesno "Dump1090 is a Mode-S decoder specifically designed for RTL-SDR devices.\n\nDump1090-mutability is a fork of MalcolmRobb's version of Dump1090 that adds new functionality and is designed to be built as a Debian/Raspbian package.\n\n  https://github.com/mutability/dump1090 \n\nContinue setup by installing dump1090-mutability?" 15 78 3>&1 1>&2 2>&3)
+    CONTINUE_SETUP=$(whiptail --backtitle "${RECEIVER_PROJECT_TITLE}" --title "Dump1090-mutability Setup" --yesno "Dump1090 is a Mode-S decoder specifically designed for RTL-SDR devices.\n\nDump1090-mutability is a fork of MalcolmRobb's version of Dump1090 that adds new functionality and is designed to be built as a Debian/Raspbian package.\n\n  https://github.com/tre8154/dump1090 \n\nContinue setup by installing dump1090-mutability?" 15 78 3>&1 1>&2 2>&3)
     if [[ ${CONTINUE_SETUP} -eq 1 ]] ; then
         # Setup has been halted by the user.
         echo -e "\e[91m  \e[5mINSTALLATION HALTED!\e[25m"
@@ -148,7 +148,7 @@ else
     cd ${RECEIVER_BUILD_DIRECTORY}/dump1090-mutability 2>&1
     echo -e "\e[94m  Cloning the dump1090-mutability git repository locally...\e[97m"
     echo -e ""
-    git clone https://github.com/mutability/dump1090.git 2>&1
+    git clone https://github.com/tre8154/dump1090.git 2>&1
 fi
 
 ## BUILD AND INSTALL THE COMPONENT PACKAGE
