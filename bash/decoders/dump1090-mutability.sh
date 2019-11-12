@@ -148,7 +148,7 @@ else
     cd ${RECEIVER_BUILD_DIRECTORY}/dump1090-mutability 2>&1
     echo -e "\e[94m  Cloning the dump1090-mutability git repository locally...\e[97m"
     echo -e ""
-    git clone https://github.com/tre8154/dump1090.git 2>&1
+    git clone https://github.com/tre8154/dump1090-mutability.git 2>&1
 fi
 
 ## BUILD AND INSTALL THE COMPONENT PACKAGE
