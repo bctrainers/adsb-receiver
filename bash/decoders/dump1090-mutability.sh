@@ -160,7 +160,7 @@ echo -e ""
 # Change to the component build directory.
 if [[ ! "${PWD}" = "${RECEIVER_BUILD_DIRECTORY}/dump1090-mutability/dump1090" ]] ; then
     echo -e "\e[94m  Entering the dump1090-mutability build directory...\e[97m"
-    cd ${RECEIVER_BUILD_DIRECTORY}/dump1090-mutability/dump1090 2>&1
+    cd ${RECEIVER_BUILD_DIRECTORY}/dump1090-mutability/dump1090-mutability 2>&1
 fi
 
 # Dummy test for consistency with other feeder install scripts.
