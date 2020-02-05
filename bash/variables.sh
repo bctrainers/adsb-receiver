@@ -34,25 +34,36 @@
 ## SOFTWARE VERSIONS
 
 # The ADS-B Receiver Project
-PROJECT_VERSION="2.7.2.r1_by_tre8154"
+# Orig: https://github.com/jprochazka/adsb-receiver 65efe86
+# Fork: https://github.com/tre8154/adsb-receiver c860cf2
+PROJECT_VERSION="2.8"
 
 # RTL-SDR OGN
-RTLSDROGN_VERSION="0.2.5"
+# Ref from: https://github.com/glidernet/ogn-rf
+RTLSDROGN_VERSION="0.2.4"
 
 # FlightAware PiAware
-DUMP1090_FA_VERSION="3.7.2"
-PIAWARE_VERSION="3.7.2"
+# Ref from: https://github.com/flightaware/piaware
+DUMP1090_FA_VERSION="3.8.0"
+PIAWARE_VERSION="3.8.0"
 
 # PlaneFinder Client
+# Ref from: https://planefinder.net/sharing/client#linux
 PLANEFINDER_CLIENT_VERSION_ARM="4.1.1"
 PLANEFINDER_CLIENT_VERSION_I386="4.1.1"
 
 # Flightradar24 Client
-FLIGHTRADAR24_CLIENT_VERSION_I386="1.0.18-5"
+# Ref from: https://www.flightradar24.com/share-your-data#linux
+
+# Transitioning to 64 bit only (where available).
+# FLIGHTRADAR24_CLIENT_VERSION_I386="1.0.24-5"
+
+FLIGHTRADAR24_CLIENT_VERSION_AMD64="1.0.24-5"
 
 # mlat-client
-MLAT_CLIENT_VERSION="0.2.6"
-MLAT_CLIENT_TAG="v0.2.6"
+# Most recent is from ADSBEx: https://github.com/adsbxchange/mlat-client
+MLAT_CLIENT_VERSION="0.2.10"
+MLAT_CLIENT_TAG="v0.2.10"
 
 # PhantomJS
 PHANTOMJS_VERSION="2.1.1"
