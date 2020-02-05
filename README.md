@@ -1,8 +1,6 @@
-<img src="http://assets.jacobwall.netdna-cdn.com/adsb-receiver_logo.png" width="465" height="135" />
-
 # The ADS-B Receiver Project :airplane:
 
-This repository contains a set of scripts and files which can be used to setup an ADS-B receiver on a clean installation of a Debian derived operating system. The scripts are executed in order by the main install script depending on the installation options chosen by the user.
+This repository contains scripts in a continuation of the ADSB project by jprochazka.
 
 **ADS-B Receiver Web Portal Features**
 
@@ -10,19 +8,9 @@ This repository contains a set of scripts and files which can be used to setup a
 * Control what is displayed online via a web based administration area.
 * A more uniform website site layout that can be easily navigated.
 * Web accessible dump1090 and system performance graphs.
-* A web accessible live dump1090 map.
-* A web accessible live dump978 map.
-* A blog which can be used to share your plane tracking experiences with others.
+* A web accessible live dump1090 & dump978\* map.
 * Informs visitors when specific flights are being tracked by dump1090.
 * Easily customize the look of your portal using the template system.
-
-**Web Portal Screenshots**
-
-![dump1090 GIF](http://assets-jacobwall.netdna-ssl.com/adsbreceiver_readme.gif)
-
-<img src="http://assets.jacobwall.netdna-cdn.com/adsb-receiver_live_dump1090.png" width="600" height="308" />
-
-<img src="http://assets.jacobwall.netdna-cdn.com/adsb-receiver_performance_graphs.png" width="600" height="535" />
 
 **Please note:** As of February 2016, the scripts do not work when run on an SD card where the current PiAware image was installed. The scripts require a clean installation of a Debian derived operating system.
 
@@ -31,24 +19,20 @@ The ADS-B Receiver Project website is located at https://www.adsbreceiver.net.
 ### Obtaining And Using This Software
 
 Download the latest ADS-B Receiver Raspbian Stretch Lite image for Raspberry Pi devices.
-https://github.com/jprochazka/adsb-receiver/releases/latest
-
-When setting up the portal you will have to choose between a lite or advanced installation. Advanced features adds flight logging and plotting and should only be chosen on devices running a more sturdy data storage solution.
-
-*It is recommended that anyone using a SD card as they storage medium not attempt to use the advanced features.*
+https://github.com/bctrainers/adsb-receiver/
 
 #### Manual installations...
 
     sudo apt-get update
     sudo apt-get install git
-    git clone https://github.com/jprochazka/adsb-receiver.git
+    git clone https://github.com/bctrainers/adsb-receiver.git
     cd ~/adsb-receiver
     chmod +x install.sh
     ./install.sh
 
 #### Updating existing installations...
 
-Your local repository will be updated each time install.sh is executed.
+Your local repository will be updated each time `install.sh` is executed.
 
     cd ~/adsb-receiver
     ./install.sh
@@ -87,13 +71,13 @@ The following software can be installed using these scripts.
 
 ### Supported Operating Systems
 
-The scripts and packages have been tested on most Debian Jessie and Stretch based operating systems.
+The scripts and packages have been tested on most recent Debian 8, 9, and 10 based operating systems.
 
-The scripts are NOT supported on existing PiAware *image based* installations. The PiAware image is still based on Raspbian Wheezey version which is missing some required libraries for dump1090-mutability installation.
+Do not install this project onto an OS with PiAware pre-existing on it!
 
 ### Useful Links
 
-- Website - https://www.adsbreceiver.net/
-- Forum - https://adsb.discourse.group/
-- Wiki - https://github.com/jprochazka/adsb-receiver/wiki
-- Changelog - https://github.com/jprochazka/adsb-receiver/blob/master/CHANGELOG.md
+- Website - https://github.kcadsb.com/
+- Forum - https://forum.kcadsb.com/
+- Wiki - https://wiki.kcadsb.com/
+- Changelog - https://github.com/bctrainers/adsb-receiver/blob/master/CHANGELOG.md
