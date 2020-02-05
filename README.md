@@ -1,4 +1,4 @@
-# The ADS-B Receiver Project :airplane:
+# The ADS-B Receiver Project Redux
 
 This repository contains scripts in a continuation of the ADSB project by jprochazka.
 
