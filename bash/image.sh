@@ -60,7 +60,6 @@ if (whiptail --backtitle "${RECEIVER_PROJECT_TITLE}" --title "ADS-B Receiver Pro
     echo -e "\e[93m  ------------------------------------------------------------------------------\e[97m"
     echo -e ""
     sudo apt-get update
-    sudo apt-get -y dist-upgrade
     echo -e ""
     echo -e "\e[93m  ------------------------------------------------------------------------------"
     echo -e "\e[92m  Your operating system should now be up to date.\e[39m"
@@ -118,6 +117,7 @@ if [[ $(dpkg-query -W -f='${STATUS}' dump1090-mutability 2>/dev/null | grep -c "
     echo -e "\e[94m  Reloading dump1090-mutability...\e[97m"
     echo -e ""
     sudo service dump1090-mutability force-reload
+	echo -e "\e[94m  Reloading dump1090-mutability completed...\e[97m"
 fi
 
 # Download Heywhatsthat.com maximum range rings if the user wishes them to be displayed.

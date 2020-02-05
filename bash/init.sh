@@ -64,7 +64,7 @@ function AptUpdate() {
     echo -e "\e[92m  Downloading the latest package lists for all enabled repositories and PPAs..."
     echo -e "\e[93m  ------------------------------------------------------------------------------\e[97m"
     echo -e ""
-    sudo apt-get update
+    sudo apt-get update -y
     echo -e ""
     echo -e "\e[93m  ------------------------------------------------------------------------------"
     echo -e "\e[92m  Finished downloading and updating package lists.\e[39m"
@@ -163,10 +163,10 @@ function UpdateOperatingSystem() {
         echo -e "\n\e[91m  ${RECEIVER_PROJECT_TITLE}"
     fi
     echo -e ""
-    echo -e "\e[92m  Downloading and installing the latest updates for your operating system..."
+    echo -e "\e[92m  Downloading and installing the latest update packages for your system..."
     echo -e "\e[93m  ------------------------------------------------------------------------------\e[97m"
     echo -e ""
-    sudo apt-get -y dist-upgrade
+    sudo apt-get -y upgrade
     echo -e ""
     echo -e "\e[93m  ------------------------------------------------------------------------------"
     echo -e "\e[92m  Your operating system should now be up to date.\e[39m"
