@@ -36,6 +36,7 @@
 RECEIVER_ROOT_DIRECTORY="${PWD}"
 RECEIVER_BASH_DIRECTORY="${RECEIVER_ROOT_DIRECTORY}/bash"
 RECEIVER_BUILD_DIRECTORY="${RECEIVER_ROOT_DIRECTORY}/build"
+LOGDIRECTORY="${RECEIVER_ROOT_DIRECTORY}/logs"
 
 ### INCLUDE EXTERNAL SCRIPTS
 
@@ -78,10 +79,27 @@ else
     exit 1
 fi
 
+# Make a log directory if it does not already exist.
+if [ ! -d "$LOGDIRECTORY" ]; then
+	mkdir $LOGDIRECTORY
+fi
+LOGFILE="$LOGDIRECTORY/adsbex_setup-$(date +%F_%R)"
+touch $LOGFILE
+
 ## /etc/rc.local has been deprecated - code removed in favor of services.
 
+echo -e "\e[94m Adding services to systemd... \e[97m"
+    sudo cp {RECEIVER_ROOT_DIRECTORY}/additional/adsbex/adsbexchange-mlat.service /lib/systemd/system >> $LOGFILE 2>&1
+	sudo cp {RECEIVER_ROOT_DIRECTORY}/additional/adsbex/adsbexchange-maint.service /lib/systemd/system >> $LOGFILE 2>&1
+	sudo cp {RECEIVER_ROOT_DIRECTORY}/additional/adsbex/adsbexchange-maint.sh $RECEIVER_BUILD_DIRECTORY/adsbexchange/ >> $LOGFILE 2>&1
+echo -e "\e[94m Reloading systemd... \e[97m"
+    sudo systemctl daemon-reload  >> $LOGFILE 2>&1
+echo -e "\e[94m Enabling systemd for ADSB Exchange... \e[97m"	
+    sudo systemctl enable adsbexchange-mlat >> $LOGFILE 2>&1
 
-
+    
+echo -e "\e[94m Removing old rc.local segments for ADSB Exchange... \e[97m"	
+sudo sed -i -e '/adsbexchange-netcat_maint.sh/d' /etc/rc.local >> $LOGFILE 2>&1
 
 ## CHECK FOR AND REMOVE ANY OLD STYLE ADB-B EXCHANGE SETUPS IF ANY EXIST
 
