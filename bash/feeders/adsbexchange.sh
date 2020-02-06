@@ -88,10 +88,17 @@ touch $LOGFILE
 
 ## /etc/rc.local has been deprecated - code removed in favor of services.
 
-echo -e "\e[94m Adding services to systemd... \e[97m"
+echo -e "\e[94m Adding services to systemd... \e[97m"  >> $LOGFILE 2>&1
+if [ ! -e "/lib/systemd/system/adsbexchange-mlat.service" ]; then
     sudo cp {RECEIVER_ROOT_DIRECTORY}/additional/adsbex/adsbexchange-mlat.service /lib/systemd/system >> $LOGFILE 2>&1
+fi
+if [ ! -e "/lib/systemd/system/adsbexchange-maint.service" ]; then
 	sudo cp {RECEIVER_ROOT_DIRECTORY}/additional/adsbex/adsbexchange-maint.service /lib/systemd/system >> $LOGFILE 2>&1
+fi
+if [ ! -e "$RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-maint.sh" ]; then	
 	sudo cp {RECEIVER_ROOT_DIRECTORY}/additional/adsbex/adsbexchange-maint.sh $RECEIVER_BUILD_DIRECTORY/adsbexchange/ >> $LOGFILE 2>&1
+fi	
+	
 echo -e "\e[94m Reloading systemd... \e[97m"
     sudo systemctl daemon-reload  >> $LOGFILE 2>&1
 echo -e "\e[94m Enabling systemd for ADSB Exchange... \e[97m"	
