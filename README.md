@@ -1,5 +1,7 @@
 # The ADS-B Receiver Project Redux
 
+## Please note that this repo is vastly alpha-quality - borderline non-functional while code is updated. It would be wise to use another ADSB repo for the time being.
+
 This repository contains scripts in a continuation of the ADSB project by jprochazka.
 
 **ADS-B Receiver Web Portal Features**
