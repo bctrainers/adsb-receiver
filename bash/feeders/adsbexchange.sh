@@ -266,7 +266,7 @@ if [ ! -d "$RECEIVER_BUILD_DIRECTORY/adsbexchange" ]; then
     mkdir $RECEIVER_BUILD_DIRECTORY/adsbexchange
 fi
 
-echo -e "\e[94m  Creating the file adsbexchange-socat_maint.sh...\e[97m"
+echo -e "\e[94m  Creating the file adsbexchange-maint.sh...\e[97m"
 
 # Some distgros place socat in /usr/bin instead of /user/sbin..
 if [ -f "/usr/sbin/socat" ]; then
@@ -283,7 +283,7 @@ if [ -z $SOCAT_PATH ]; then
     exit 1
 fi
 
-tee $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-socat_maint.sh > /dev/null <<EOF
+tee $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-maint.sh > /dev/null <<EOF
 #!/bin/sh
 while sleep 30 
 do
@@ -306,18 +306,18 @@ while sleep 30
   done
 EOF
 
-echo -e "\e[94m  Setting file permissions for adsbexchange-socat_maint.sh...\e[97m"
-sudo chmod +x $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-socat_maint.sh
+echo -e "\e[94m  Setting file permissions for adsbexchange-maint.sh...\e[97m"
+sudo chmod +x $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-maint.sh
 
 echo -e "\e[94m  Setting file permissions for adsbexchange-mlat_maint.sh...\e[97m"
 sudo chmod +x $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-mlat_maint.sh
 
 # Add a line to start up socat at boot.
 echo -e "\e[94m  Checking if the socat startup line is contained within the file /etc/rc.local...\e[97m"
-if ! grep -Fxq "$RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-socat_maint.sh &" /etc/rc.local; then
+if ! grep -Fxq "$RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-maint.sh &" /etc/rc.local; then
     echo -e "\e[94m  Adding the socat startup script line to the file /etc/rc.local...\e[97m"
     lnum=($(sed -n '/exit 0/=' /etc/rc.local))
-    ((lnum>0)) && sudo sed -i "${lnum[$((${#lnum[@]}-1))]}i $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-socat_maint.sh &\n" /etc/rc.local
+    ((lnum>0)) && sudo sed -i "${lnum[$((${#lnum[@]}-1))]}i $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-maint.sh &\n" /etc/rc.local
 fi
 
 echo -e "\e[94m  Checking if the mlat-client startup line is contained within the file /etc/rc.local...\e[97m"
@@ -333,10 +333,10 @@ echo ""
 echo -e "\e[95m  Starting both the mlat-client and socat feeds...\e[97m"
 echo ""
 
-# Kill any currently running instances of the adsbexchange-socat_maint.sh script.
-echo -e "\e[94m  Checking for any running adsbexchange-socat_maint.sh processes...\e[97m"
+# Kill any currently running instances of the adsbexchange-maint.sh script.
+echo -e "\e[94m  Checking for any running adsbexchange-maint.sh processes...\e[97m"
 if [[ $(ps -aux | grep '[a]dsbexchange-socat_maint.sh' | awk '{print $2}') ]]; then
-    echo -e "\e[94m  Killing the current adsbexchange-socat_maint.sh process...\e[97m"
+    echo -e "\e[94m  Killing the current adsbexchange-maint.sh process...\e[97m"
     sudo kill -9 $(ps -aux | grep '[a]dsbexchange-socat_maint.sh' | awk '{print $2}') &> /dev/null
 fi
 if [[ $(ps -aux | grep '[f]eed.adsbexchange.com' | awk '{print $2}') ]]; then
@@ -355,8 +355,8 @@ if [[ $(ps -aux | grep 'mlat-client' | awk '{print $2}') ]]; then
     sudo kill -9 $(ps -aux | grep '[m]lat-client' | awk '{print $2}') &> /dev/null
 fi
 
-echo -e "\e[94m  Executing the adsbexchange-socat_maint.sh script...\e[97m"
-sudo nohup $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-socat_maint.sh > /dev/null 2>&1 &
+echo -e "\e[94m  Executing the adsbexchange-maint.sh script...\e[97m"
+sudo nohup $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-maint.sh > /dev/null 2>&1 &
 
 echo -e "\e[94m  Executing the adsbexchange-mlat_maint.sh script...\e[97m"
 sudo nohup $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-mlat_maint.sh > /dev/null 2>&1 &
