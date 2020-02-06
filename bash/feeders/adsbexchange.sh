@@ -288,21 +288,25 @@ if [ -z $SOCAT_PATH ]; then
 fi
 
 tee $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-socat_maint.sh > /dev/null <<EOF
-#! /bin/sh
-while true
-  do
-    sleep 30
-    $SOCAT_PATH -u TCP:localhost:30005 TCP:feed.adsbexchange.com:30005
-  done
+#!/bin/sh
+while sleep 30 
+do
+	if ping -q -c 2 -W 5 feed.adsbexchange.com >/dev/null 2>&1
+then
+	echo Connecting to feed.adsbexchange.com:30005
+	$SOCAT_PATH -u TCP:localhost:30105 TCP:feed.adsbexchange.com:30005
+	echo Data Sent. Disconnected from feed.adsbexchange.com:30005
+done
 EOF
 
 echo -e "\e[94m  Creating the file adsbexchange-mlat_maint.sh...\e[97m"
 tee $RECEIVER_BUILD_DIRECTORY/adsbexchange/adsbexchange-mlat_maint.sh > /dev/null <<EOF
-#! /bin/sh
-while true
+#!/bin/sh
+while sleep 30
   do
-    sleep 30
-    /usr/bin/mlat-client --input-type dump1090 --input-connect 127.0.0.1:30005 --lat $RECEIVER_LATITUDE --lon $RECEIVER_LONGITUDE --alt $RECEIVER_ALTITUDE --user $RECEIVER_NAME --server feed.adsbexchange.com:31090 --no-udp --results beast,connect,127.0.0.1:30104
+	if ping -q -c 2 -W 5 feed.adsbexchange.com >/dev/null 2>&1
+	then
+    /usr/bin/mlat-client --input-type dump1090 --no-udp --input-connect 127.0.0.1:30005 --lat $RECEIVER_LATITUDE --lon $RECEIVER_LONGITUDE --alt $RECEIVER_ALTITUDE --user $RECEIVER_NAME --server feed.adsbexchange.com:31090 --no-udp --results beast,connect,127.0.0.1:30104
   done
 EOF
 
@@ -340,7 +344,7 @@ if [[ $(ps -aux | grep '[a]dsbexchange-socat_maint.sh' | awk '{print $2}') ]]; t
     sudo kill -9 $(ps -aux | grep '[a]dsbexchange-socat_maint.sh' | awk '{print $2}') &> /dev/null
 fi
 if [[ $(ps -aux | grep '[f]eed.adsbexchange.com' | awk '{print $2}') ]]; then
-    echo -e "\e[94m  Killing the current feed.adsbexchange.com process...\e[97m"
+    echo -e "\e[94m  Killing the current adsbexchange process...\e[97m"
     sudo kill -9 $(ps -aux | grep '[f]eed.adsbexchange.com' | awk '{print $2}') &> /dev/null
 fi
 
